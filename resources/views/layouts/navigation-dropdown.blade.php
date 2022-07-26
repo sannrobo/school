@@ -34,6 +34,30 @@
                       </template>
                   </button>
               </li>
+
+                            <!-- Language menu -->
+                            <li class="relative">
+                                <button class="relative align-middle rounded-md focus:outline-none focus:shadow-outline-purple" @click="toggleLangMenu" @keydown.escape="closeLangMenu" aria-label="Lang" aria-haspopup="true">
+                                    <svg class="h-5 w-5" aria-hidden="true" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M7 2a1 1 0 011 1v1h3a1 1 0 110 2H9.578a18.87 18.87 0 01-1.724 4.78c.29.354.596.696.914 1.026a1 1 0 11-1.44 1.389c-.188-.196-.373-.396-.554-.6a19.098 19.098 0 01-3.107 3.567 1 1 0 01-1.334-1.49 17.087 17.087 0 003.13-3.733 18.992 18.992 0 01-1.487-2.494 1 1 0 111.79-.89c.234.47.489.928.764 1.372.417-.934.752-1.913.997-2.927H3a1 1 0 110-2h3V3a1 1 0 011-1zm6 6a1 1 0 01.894.553l2.991 5.982a.869.869 0 01.02.037l.99 1.98a1 1 0 11-1.79.895L15.383 16h-4.764l-.724 1.447a1 1 0 11-1.788-.894l.99-1.98.019-.038 2.99-5.982A1 1 0 0113 8zm-1.382 6h2.764L13 11.236 11.618 14z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                                <template x-if="isLangMenuOpen">
+                                    <ul x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click.away="closeLangMenu" @keydown.escape="closeLangMenu" class="absolute right-0 w-32 p-2 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:text-gray-300 dark:border-gray-700 dark:bg-gray-700">
+                                        <!-- User Languages -->
+                                        <li class="flex">
+                                            <a class="inline-flex items-center justify-between w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200" href="{{ route('user.lang', 'kh') }}">
+                                                <span>{{ __('Khmer') }}</span>
+                                            </a>
+                                        </li>
+                                        <li class="flex">
+                                            <a class="inline-flex items-center justify-between w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200" href="{{ route('user.lang', 'en') }}">
+                                                <span>{{ __('English') }}</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </template>
+                            </li>
               <!-- Notifications menu -->
               <li class="relative">
                   <button class="relative align-middle rounded-md focus:outline-none focus:shadow-outline-purple" @click="toggleNotificationsMenu" @keydown.escape="closeNotificationsMenu" aria-label="Notifications" aria-haspopup="true">
