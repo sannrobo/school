@@ -13,4 +13,9 @@ class Permission extends Model
     {
         return $this->belongsToMany(Role::class);
     }
+
+    public function slug()
+    {
+        $this->belongsTo(Slug::class);
+    }
 }

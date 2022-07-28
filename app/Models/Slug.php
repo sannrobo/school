@@ -4,15 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Role extends Model
+class Slug extends Model
 {
     use HasFactory;
-    use SoftDeletes;
 
     public function permissions()
     {
-        return $this->belongsToMany(Permission::class)->orderBy('title');
+        return $this->hasMany(Permission::class);
     }
 }

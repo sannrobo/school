@@ -62,6 +62,9 @@ Route::middleware(['auth:sanctum', 'lang', 'verified'])->group(function () {
     // Dashboard
 
     Route::get('users/lang/{lang}', [\App\Http\Controllers\UserController::class, 'updatelang'])->name('user.lang');
+    // Route::get('/permissions', \App\Http\Livewire\Permission\Index::class);
+    Route::get('/roles', \App\Http\Livewire\Role\Index::class)->name('roles.index');
+    Route::get('/roles/{id}', \App\Http\Livewire\Permission\Index::class)->name('roles.assign');
     // example component
     Route::view('dashboard', 'dashboard')->name('dashboard');
     Route::view('forms', 'forms')->name('forms');

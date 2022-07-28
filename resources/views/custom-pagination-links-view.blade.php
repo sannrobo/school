@@ -22,7 +22,7 @@
                         @if ($paginator->onFirstPage())
                             disabled
                         @else
-                            @click="window.location='{{ $paginator->previousPageUrl() }}'"
+                         wire:click="previousPage" wire:loading.attr="disabled" rel="prev"
                         @endif
                     >
                         <svg class="w-4 h-4 fill-current" aria-hidden="true"
@@ -49,6 +49,7 @@
                             @if ($page == $paginator->currentPage())
                                 <li>
                                     <button
+                                    wire:click="gotoPage({{ $page }})"
                                         class="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple">
                                         {{ $page }}
                                     </button>
@@ -56,8 +57,8 @@
                             @else
                                 <li>
                                     <button 
-                                        @click="window.location='{{ $url }}'"
-                                        aria-label="{{ __('Go to page :page', ['page' => $page]) }}"
+                                        wire:click="gotoPage({{ $page }})"
+                                       
                                         class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
                                          {{ $page }}
                                     </button>
@@ -75,7 +76,7 @@
                         @if (!$paginator->hasMorePages())
                             disabled
                         @else
-                            @click="window.location='{{ $paginator->nextPageUrl() }}'"
+                        wire:click="nextPage" wire:loading.attr="disabled" rel="next"
                         @endif
                     >
                         <svg class="w-4 h-4 fill-current" aria-hidden="true"

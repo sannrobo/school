@@ -34,7 +34,7 @@
                       </template>
                   </button>
               </li>
-
+                            @can('user_access')
                             <!-- Language menu -->
                             <li class="relative">
                                 <button class="relative align-middle rounded-md focus:outline-none focus:shadow-outline-purple" @click="toggleLangMenu" @keydown.escape="closeLangMenu" aria-label="Lang" aria-haspopup="true">
@@ -58,6 +58,7 @@
                                     </ul>
                                 </template>
                             </li>
+                            @endcan
               <!-- Notifications menu -->
               <li class="relative">
                   <button class="relative align-middle rounded-md focus:outline-none focus:shadow-outline-purple" @click="toggleNotificationsMenu" @keydown.escape="closeNotificationsMenu" aria-label="Notifications" aria-haspopup="true">

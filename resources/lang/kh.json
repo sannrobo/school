@@ -844,6 +844,18 @@
     "Zimbabwe": "ស៊ីមបាវ៉េ",
     "Zip \/ Postal Code": "Zip \/ Postal Code",
     "Åland Islands": "Åland Islands",
-    "Death":"មរណភាព"
+    "Death":"មរណភាព",
+    "NAME":"ឈ្មោះ",
+    "VIEW":"មើល",
+    "SHOW":"បង្ហាញ",
+    "CREATE":"បង្កើត",
+    "UPDATE":"កែប្រែ",
+    "DELETE":"លុប",
+    "Create Role" : "បង្កើតតួនាទី",
+    "Role Name":"ឈ្មោះតួនាទី",
+    "ROLE NAME":"ឈ្មោះតួនាទី"
+
+
+
 
 }
