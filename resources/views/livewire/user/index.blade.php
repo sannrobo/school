@@ -95,14 +95,20 @@
                                         <x-slot name="form">
                                             <div class="col-span-6">
                                                 <x-label for="fullname">{{__('Full Name')}}</x-label>
-                                                <x-input ></x-input>
+                                                <x-input  wire:model="fullname" autofocus></x-input>
                                                 <x-input-error for="fullname" class="mt-2" />
                                                 
                                             </div>
                                             <div class="col-span-6">
                                                 <x-label for="email">{{__('Email')}}</x-label>
-                                                <x-input ></x-input>
+                                                <x-input wire:model="email" ></x-input>
                                                 <x-input-error for="email" class="mt-2" />
+                                            </div>
+
+                                            <div class="col-span-6">
+                                                <x-label for="password">{{__('Password')}}</x-label>
+                                                <x-input wire:model="password" type="password"></x-input>
+                                                <x-input-error for="password" class="mt-2" />
                                             </div>
 
                                             <div class="flex justify-end col-span-6">
