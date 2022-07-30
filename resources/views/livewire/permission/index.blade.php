@@ -17,10 +17,10 @@
                                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                                         <div class="shadow-md overflow-hidden  sm:rounded-lg">
-                                        <x-table.table>
+                                        <x-table.table class="border-2">
                                             <x-slot name="header">
                                                 <x-table.heading.heading>#</x-table.heading.heading>
-                                                <x-table.heading.heading>{{ __('NAME') }}</x-table.heading.heading>
+                                                <x-table.heading.heading>{{ __('Page') }}</x-table.heading.heading>
                                                 <x-table.heading.heading>{{ __('VIEW') }}</x-table.heading.heading>
                                                 <x-table.heading.heading>{{ __('SHOW') }}</x-table.heading.heading>
                                                 <x-table.heading.heading>{{ __('CREATE') }}</x-table.heading.heading>
@@ -33,12 +33,12 @@
                                                     $i=1
                                                 @endphp
                                                 @foreach ($slugs as $slug)
-                                                    <x-table.row.row>
-                                                        <x-table.cell.cell>{{ $i++ }}</x-table.cell.cell>
-                                                        <x-table.cell.cell>{{ __($slug->title) }}</x-table.cell.cell>
+                                                    <x-table.row.row >
+                                                        <x-table.cell.cell >{{ $i++ }}</x-table.cell.cell>
+                                                        <x-table.cell.cell >{{ __($slug->title) }}</x-table.cell.cell>
                                                         @foreach ($slug->permissions as $permission)
                                                         {{-- wire:model="per.{{ $permission->id }}" --}}
-                                                            <x-table.cell.cell><input wire:model="per.{{ $permission->id }}" class="h-5 w-5 cursor-pointer focus:shadow-outline-indigo"  type="checkbox" value="{{ $permission->id }}"/></x-table.cell.cell>
+                                                            <x-table.cell.cell class="border-2"><input wire:model="per.{{ $permission->id }}" class="h-5 w-5 cursor-pointer focus:shadow-outline-indigo"  type="checkbox" value="{{ $permission->id }}"/></x-table.cell.cell>
                                                          @endforeach                                                                                                         
                                                      </x-table.row.row>
                                                  @endforeach                                                         

@@ -1,3 +1,7 @@
+<div>
+
+
+
 @if ($paginator->hasPages())
 <div aria-label="{{ __('Pagination Navigation') }}"
     class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800"
@@ -15,15 +19,17 @@
         <nav aria-label="Table navigation">
             <ul class="inline-flex items-center">
                 <li>
-                    <button 
+                    <button
                         class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
-                        aria-label="Previous"
+                        aria-label="Previous" @if($paginator->onFirstPage()) disabled @else wire:click="previousPage" @endif
 
-                        @if ($paginator->onFirstPage())
+                        
+
+                        {{-- @if ($paginator->onFirstPage())
                             disabled
                         @else
-                         wire:click="previousPage" wire:loading.attr="disabled" rel="prev"
-                        @endif
+                         wire:click="previousPage" wire:loading.attr="" rel="prev"
+                        @endif --}}
                     >
                         <svg class="w-4 h-4 fill-current" aria-hidden="true"
                             viewBox="0 0 20 20">
@@ -69,15 +75,18 @@
                 @endforeach
 
                 <li>
+                    @if($paginator->hasMorePages())
                     <button
                         class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
-                        aria-label="Next"
+                        aria-label="Next" 
+                        wire:click="nextPage"
+                        wire:loading.attr="disabled"
 
-                        @if (!$paginator->hasMorePages())
+                        {{-- @if (!$paginator->hasMorePages())
                             disabled
                         @else
                         wire:click="nextPage" wire:loading.attr="disabled" rel="next"
-                        @endif
+                        @endif --}}
                     >
                         <svg class="w-4 h-4 fill-current" aria-hidden="true"
                             viewBox="0 0 20 20">
@@ -86,9 +95,14 @@
                                 clip-rule="evenodd" fill-rule="evenodd"></path>
                         </svg>
                     </button>
+
+                    @endif
+
                 </li>
             </ul>
         </nav>
     </span>
 </div>
 @endif
+</div>
+

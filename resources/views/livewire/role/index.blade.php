@@ -43,7 +43,7 @@
                                                 @foreach ($roles as $role)
                                                     <x-table.row.row class="text-center">
                                                         <x-table.cell.cell>{{ $i++ }}</x-table.cell.cell>
-                                                        <x-table.cell.cell><a href="{{ route('roles.assign',$role->id) }}" class=" dark:text-white font-normal text-indigo-500 hover:underline hove:runderline-offset-1 hover:text-indigo-700 transition-all">{{ __($role->title) }}</a></x-table.cell.cell>
+                                                        <x-table.cell.cell><a href="{{ route('roles.assign',$role->id) }}" class=" dark:text-white font-normal text-indigo-500 hover:underline hove:runderline-offset-1 hover:text-indigo-700 transition-all">{{$role->title }}</a></x-table.cell.cell>
                                                         
                                                         <x-table.cell.cell>
                                                             <button wire:click="Edit({{ $role->id }})" class="focus:border-transparent">

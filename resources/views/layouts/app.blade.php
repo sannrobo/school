@@ -11,6 +11,9 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chenla&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -40,7 +43,7 @@
 
 </head>
 
-<body >
+<body style=" font-family: Chenla,sans-serif;">
     <div class="flex h-screen bg-gray-50 dark:bg-gray-900 isSideMenuOpen" :class="{ 'overflow-hidden': isSideMenuOpen }">
         @include('layouts.menu')
         @include('layouts.mobile-menu')

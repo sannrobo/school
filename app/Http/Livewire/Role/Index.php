@@ -7,6 +7,7 @@ use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\WithPagination;
 
+
 class Index extends Component
 {
     use LivewireAlert;

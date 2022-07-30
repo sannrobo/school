@@ -9,13 +9,13 @@
             <div class="block mb-8" 
 
             >
-                {{-- <button id="btnCreate"   wire:click="OpenModal" class="flex space-x-1 items-center bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-2 rounded">
+                <button id="btnCreate"   wire:click="OpenModal" class="flex space-x-1 items-center bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-2 rounded">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                         
                     </svg>  
                     <span>{{ __('Create') }}</span>
-                </button> --}}
+                </button>
                 {{-- <a href="{{ route('r.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Create</a> --}}
             </div>
 
@@ -82,31 +82,58 @@
                             </div>
                         </div>
                         {{-- show modal --}}
-                        {{-- <x-dialog-modal wire:model.debounce.500ms="isModalOpen">
+                        <x-dialog-modal wire:model.debounce.500ms="isModalOpen">
                             <x-slot  name="title">
-                                {{ __('Create Role') }}
+                                {{ __('Create User') }}
                                 
                             </x-slot>
                 
                             <x-slot name="content">
                              
                                 <div class="mt-10" >
-                                    <label class="text-base" for="rolename">{{ __('Role Name') }}</label>
-                                    <x-input id="rolename" type="text" class="block w-3/4 mt-1"  autofocus  wire:model.debounce.500ms="rolename" wire:keydown.enter="saveRole" />
-                                    <x-input-error for="rolename" class="mt-2" />
+                                    <x-form-section submit="saveUser">
+                                        <x-slot name="form">
+                                            <div class="col-span-6">
+                                                <x-label for="fullname">{{__('Full Name')}}</x-label>
+                                                <x-input ></x-input>
+                                                <x-input-error for="fullname" class="mt-2" />
+                                                
+                                            </div>
+                                            <div class="col-span-6">
+                                                <x-label for="email">{{__('Email')}}</x-label>
+                                                <x-input ></x-input>
+                                                <x-input-error for="email" class="mt-2" />
+                                            </div>
+
+                                            <div class="flex justify-end col-span-6">
+                                                
+                                                <div>                                                
+                                                    <x-purple-button type="submit" class="ml-2" wire:loading.attr="disabled">
+                                                        {{ __($text) }}
+                                                    </x-purple-button>
+                                                </div>
+                                            </div>
+                                           
+
+                            
+
+                                        </x-slot>
+
+      
+                                    </x-form-section>
                                 </div>
                             </x-slot>
                 
                             <x-slot name="footer">
                                 <x-secondary-button wire:click="$toggle('isModalOpen')" wire:loading.attr="disabled">
-                                    {{ __('Cancel') }}
+                                    {{ __('Close')}}
                                 </x-secondary-button>
                 
-                                <x-purple-button class="ml-2" wire:click="{{ $text=='Save' ? 'saveRole':'updateRole' }}" wire:loading.attr="disabled">
+                                {{-- <x-purple-button type="submit" class="ml-2" wire:loading.attr="disabled">
                                     {{ __($text) }}
-                                </x-purple-button>
+                                </x-purple-button> --}} 
                             </x-slot>
-                        </x-dialog-modal> --}}
+                        </x-dialog-modal>
                         {{-- end --}}
                     </div>
                 </div>
