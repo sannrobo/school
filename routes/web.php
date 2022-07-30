@@ -65,6 +65,7 @@ Route::middleware(['auth:sanctum', 'lang', 'verified'])->group(function () {
     // Route::get('/permissions', \App\Http\Livewire\Permission\Index::class);
     Route::get('/roles', \App\Http\Livewire\Role\Index::class)->name('roles.index');
     Route::get('/roles/{id}', \App\Http\Livewire\Permission\Index::class)->name('roles.assign');
+    Route::get('/users', \App\Http\Livewire\User\Index::class)->name('users.index');
     // example component
     Route::view('dashboard', 'dashboard')->name('dashboard');
     Route::view('forms', 'forms')->name('forms');
