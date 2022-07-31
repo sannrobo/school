@@ -59,7 +59,7 @@ class Index extends Component
 
         if(!$this->isModalOpen)
         {
-            $this->rolename='';
+           $this->reset();
         }
     }
 
@@ -71,11 +71,9 @@ class Index extends Component
         $role->save();
 
 
-
-
         $this->isModalOpen = false;
 
-        $this->rolename='';
+        $this->reset();
 
         $this->alert('success', 'Saved!', [
             'position' => 'center',

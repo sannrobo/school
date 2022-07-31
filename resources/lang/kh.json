@@ -857,7 +857,20 @@
     "Page":"ទំព័រ",
     "Permission":"សិទ្ធិ",
     "User":"អ្នកប្រើប្រាស់",
-    "Create User":"បង្កើតអ្នកប្រើប្រាស់"
+    "Create User":"បង្កើតអ្នកប្រើប្រាស់",
+    "Full Name":"ឈ្មោះ",
+    "The Email must be required.":"បញ្ចូលអ៊ីម៉ែល",
+    "The Email format is not valid.":"អ៊ីម៉ែលមិនត្រឹមត្រូវ",
+    "The Name cannot be emtpy.":"បញ្ចូលឈ្មោះ",
+    "The Name must be required.":"បញ្ចូលឈ្មោះ",
+    "The Password must be required.":"ពាក្យសម្ងាត់ត្រូវតែបញ្ចូល",
+    "The Password at atleast 6 character.":"ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោច 6 អក្សរ",
+    "The Confirm Password must the same password.":"ពាក្យសម្ងាត់ត្រូវតែដូចគ្នា",
+    "Please Select Role Name.":"ជ្រើសរើសតួនាទី"
+
+
+
+
 
 
 

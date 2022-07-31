@@ -6,6 +6,7 @@ module.exports = {
     purge: ['./storage/framework/views/*.php', './resources/views/**/*.blade.php'],
 
     theme: {
+
         themeVariants: ['dark'],
         customForms: (theme) => ({
             default: {
@@ -179,12 +180,15 @@ module.exports = {
             maxHeight: {
                 '0': '0',
                 xl: '36rem',
+             
+
             },
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
                
             },
         },
+
     },
 
     variants: {
