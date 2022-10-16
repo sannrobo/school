@@ -19,9 +19,11 @@
         <nav aria-label="Table navigation">
             <ul class="inline-flex items-center">
                 <li>
+                    @if(!$paginator->onFirstPage())
                     <button
+                        wire:click="previousPage"
                         class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
-                        aria-label="Previous" @if($paginator->onFirstPage()) disabled @else wire:click="previousPage" @endif
+                        aria-label="Previous" 
 
                         
 
@@ -38,6 +40,7 @@
                                 clip-rule="evenodd" fill-rule="evenodd"></path>
                         </svg>
                     </button>
+                    @endif
                 </li>
 
                 {{-- Pagination Elements --}}
@@ -55,6 +58,7 @@
                             @if ($page == $paginator->currentPage())
                                 <li>
                                     <button
+                                    disabled
                                     wire:click="gotoPage({{ $page }})"
                                         class="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple">
                                         {{ $page }}
@@ -95,8 +99,10 @@
                                 clip-rule="evenodd" fill-rule="evenodd"></path>
                         </svg>
                     </button>
-
                     @endif
+
+
+
 
                 </li>
             </ul>

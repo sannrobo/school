@@ -40,7 +40,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth:sanctum', 'lang', 'verified'])->group(function () {
     Route::get('/', function () {
-        return view('welcome');
+        return view('dashboard'); 
     });
 
     // User & Profile...
@@ -66,13 +66,27 @@ Route::middleware(['auth:sanctum', 'lang', 'verified'])->group(function () {
     Route::get('/roles', \App\Http\Livewire\Role\Index::class)->name('roles.index');
     Route::get('/roles/{id}', \App\Http\Livewire\Permission\Index::class)->name('roles.assign');
     Route::get('/users', \App\Http\Livewire\User\Index::class)->name('users.index');
-    // example component
-    Route::view('dashboard', 'dashboard')->name('dashboard');
-    Route::view('forms', 'forms')->name('forms');
-    Route::view('cards', 'cards')->name('cards');
-    Route::view('charts', 'charts')->name('charts');
-    Route::view('buttons', 'buttons')->name('buttons');
-    Route::view('modals', 'modals')->name('modals');
-    Route::view('tables', 'tables')->name('tables');
-    Route::view('calendar', 'calendar')->name('calendar');
+    Route::get('/students', \App\Http\Livewire\Student\Index::class)->name('students.index');
+    Route::get('/students/create', \App\Http\Livewire\Student\Create::class)->name('students.create');
+    Route::get('/students/{id}', \App\Http\Livewire\Student\Detail::class)->name('students.info');
+    Route::get('/sections', \App\Http\Livewire\Sections\Index::class)->name('sections.index');
+    Route::get('/class', \App\Http\Livewire\Class\Index::class)->name('class.index');
+    Route::get('/courses', \App\Http\Livewire\Course\Index::class)->name('courses.index');
+    Route::get('/rooms', \App\Http\Livewire\Room\Index::class)->name('rooms.index');
+    Route::get('/employee', \App\Http\Livewire\Employee\Index::class)->name('emp.index');
+    Route::get('/employee/create', \App\Http\Livewire\Employee\Create::class)->name('emp.create');
+    Route::get('/employee/{id}', \App\Http\Livewire\Employee\Edit::class)->name('emp.edit');
+    Route::get('/class/create', \App\Http\Livewire\Class\Create::class)->name('class.create');
+    Route::get('/class/{id}/Edit', \App\Http\Livewire\Class\Edit::class)->name('class.edit');
+    Route::get('/class/detail/{id}', \App\Http\Livewire\Class\Detail::class)->name('class.detail');
+    Route::get('export-student/{id}',[App\Http\Controllers\UserController::class,'export'])->name('export-excel');
+    Route::get('/attendance',\App\Http\Livewire\Attendance\Index::class)->name('att.index');
+    Route::get('/attendance/report',\App\Http\Livewire\Attendance\Report::class)->name('attr.report');
+    Route::get('/scores',\App\Http\Livewire\Score\Index::class)->name('score.index');
+    Route::get('/invoices',\App\Http\Livewire\Account\Invoice::class)->name('inv.index');
+    Route::get('/invoices/create',\App\Http\Livewire\Account\Create::class)->name('inv.create');
+    Route::get('/income',\App\Http\Livewire\Account\Income::class)->name('income.index');
+    Route::get('/', [\App\Http\Controllers\Dashboard::class, 'index'])->name('dashboard');
+    Route::get('/invoices/print/{id}', [\App\Http\Controllers\Dashboard::class, 'printInvoice'])->name('invoice.print');
+ 
 });

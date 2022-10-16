@@ -12,8 +12,12 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 
 
+
+
 class Index extends Component
-{   use LivewireAlert;
+{   
+    
+    use LivewireAlert;
 
     public $text;
     public $isModalOpen=false;
@@ -25,6 +29,10 @@ class Index extends Component
     public $password;
     public $userid;
     public $updatePass=false;
+    public $isResetPass=false;
+    public $newpass;
+
+
 
 
 
@@ -32,7 +40,8 @@ class Index extends Component
         'fullname' => 'required|min:4',
         'email' => 'required|email|unique:users,email',
         'cfpassword'=>'same:password',
-        'roleid'=>'required'
+        'roleid'=>'required',
+        'newpass'=>'required|min:6'
         
     ];
     protected $listeners = [
@@ -48,19 +57,19 @@ class Index extends Component
         'password.required' => 'The Password must be required.',
         'password.min'=>'The Password at atleast 6 character.',
         'cfpassword.same'=>'The Confirm Password must the same password.',
-        'roleid.required'=>'Please Select Role Name.'
+        'roleid.required'=>'Please Select Role Name.',
+        'newpass.required' =>'New Password is required',
+        'newpass.min'=>'The New Password at atleast 6 character'
+
 
     ];
 
     public function updated($propertyName)
     {
+
         $this->validateOnly($propertyName);
 
-        if(!$this->isModalOpen)
-        {
-          $this->reset();
-          
-        }
+
     }
     public function render()
     {
@@ -176,4 +185,37 @@ class Index extends Component
      
 
     }
+
+    public function editUserPass($id)
+    {
+        $this->isResetPass=true;
+        $this->userid = $id;
+        $this->reset('newpass');
+
+    }
+
+    public function ResetPass()
+    {
+
+        $u = User::FindOrFail($this->userid);
+        $u->password = hash::make($this->newpass);
+        $u->save();
+       
+        $this->alert('success', 'Updated!', [
+            'position' => 'Center',
+            'timer' => '1000',
+            'toast' => false,
+            'timerProgressBar' => true,
+            'width' => '300',
+           ]);
+
+        $this->isResetPass=false;
+    
+
+       
+          
+
+    }
+
+
 }

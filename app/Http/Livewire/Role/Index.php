@@ -43,10 +43,6 @@ class Index extends Component
     }
 
 
-    public function save()
-    {
-        dd('here');
-    }
 
     protected $rules = [
         'rolename' => 'required',

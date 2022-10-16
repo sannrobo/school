@@ -28,7 +28,7 @@
                             <div class="flex flex-col">
                                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                                        <div class="shadow-md overflow-hidden  sm:rounded-lg">
+                                        <div class="overflow-hidden  sm:rounded-lg">
                                         <x-table.table>
                                             <x-slot name="header">
                                                 <x-table.heading.heading class="text-center">#</x-table.heading.heading>

@@ -9,36 +9,33 @@
     <title>{{ $title }}</title>
  
     <!-- Fonts -->
+
+    <script src="{{asset('js/init-alpine.js')}}" defer></script>
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Chenla&display=swap" rel="stylesheet">
+    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
 
+    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/tailwind.output.css') }}" />
-    <script src="{{asset('js/init-alpine.js')}}" defer></script>
-    {{-- <script defer src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script> --}}
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
- 
+    {{-- <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script> --}}
+    {{-- <script src="{{asset('js/init-alpine.js')}}" defer></script> --}}
 
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>
-    <script src="{{asset('js/charts-lines.js')}}" defer></script>
-    <script src="{{asset('js/charts-pie.js')}}" defer></script>
-    <script src="{{asset('js/charts-bars.js')}}" defer></script> --}}
-    
+
     @livewireStyles
     {{-- <script>
         import Turbolinks from 'turbolinks';
         Turbolinks.start()
     </script> --}}
+    <script defer src="https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-    <!-- Scripts -->
-    {{-- <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.6.0/dist/alpine.js" defer></script> --}}
-
-    {{-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
+{{-- 
+     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>  --}}
 
 
 </head>
@@ -52,8 +49,24 @@
             @include('layouts.navigation-dropdown')
             <main class="h-full overflow-y-auto">
                 {{ $slot }}
+
             </main>
+
+            <footer class="h-12 dark:bg-gray-800 dark:text-white   bg-gray-100 px-8  rounded-md   flex justify-start py-4 text-gray-500">
+                <p class="mr-2 text-md">Copyright &copy; {{ date('Y') }} <span class="dark:text-blue-400 text-blue-600 text-md"><a href="https://facebook.com/sanrobo12" target="_Blank">SANN ROBO</a></span>.All rights reserved.</p>
+             </footer>
+
+
+
+
+
+            
+
+
         </div>
+
+
+
 
 
         @stack('modals')
