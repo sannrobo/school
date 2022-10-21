@@ -17,7 +17,7 @@ class ClassStudentExport implements FromView
     $this->student = ClassStudent::join('students','class_student.student_id','students.id')
 
     ->whereIn('class_student.class_id',([$id]))
-    ->where('students.status',1)
+
 
     ->get();
     

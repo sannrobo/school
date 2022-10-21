@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Course;
 
 use App\Models\Course;
+use Illuminate\Support\Facades\Gate;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -22,6 +23,7 @@ class Index extends Component
     public $text="Save";
     public function render()
     {
+        abort_if(Gate::denies('show_course'),403);
         $courses = Course::paginate(5);
         return view('livewire.course.index',compact('courses'));
     }
@@ -33,7 +35,7 @@ class Index extends Component
 
     public function saveSection()
     {
-
+        abort_if(Gate::denies('create_course'),403);
         Course::create([
         'name'=>$this->name,
         'price'=>$this->price,
@@ -64,6 +66,7 @@ class Index extends Component
 
     public function updateSection()
     {
+        abort_if(Gate::denies('update_course'),403);
         Course::find($this->secid)->update([
             'name'=>$this->name,
             'description'=>$this->desc,

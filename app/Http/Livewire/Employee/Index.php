@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Employee;
 
 use App\Models\Employee;
+use Illuminate\Support\Facades\Gate;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
@@ -16,6 +17,7 @@ class Index extends Component
     ];
     public function render()
     {
+        abort_if(Gate::denies('show_employee'),403);
         $emps = Employee::join('roles','employees.role_id','roles.id')->get(['employees.*','roles.title as role']);
        
         return view('livewire.employee.index',compact('emps'));

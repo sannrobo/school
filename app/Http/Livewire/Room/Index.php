@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Room;
 
 use App\Models\Room;
+use Illuminate\Support\Facades\Gate;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -16,13 +17,11 @@ class Index extends Component
     public $desc;
     public $price;
     public $secid;
-    protected $listeners = [
-        'confirmed'
-    ];
 
     public $text="Save";
     public function render()
     {
+        abort_if(Gate::denies('show_room'),403);
         $rooms = Room::paginate(5);
         return view('livewire.room.index' , compact('rooms'));
     }

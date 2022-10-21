@@ -9,6 +9,7 @@
             <div class="block mb-8" 
 
             >
+            @can('create_role')
                 <button id="btnCreate"   wire:click="OpenModal" class="dark:bg-white dark:hover:bg-white  flex space-x-1 items-center bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-2 rounded">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 dark:text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
@@ -16,6 +17,7 @@
                     </svg>  
                     <span class="dark:text-black">{{ __('Create') }}</span>
                 </button>
+                @endcan
                 {{-- <a href="{{ route('r.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Create</a> --}}
             </div>
 
@@ -46,11 +48,13 @@
                                                         <x-table.cell.cell><a href="{{ route('roles.assign',$role->id) }}" class=" dark:text-white font-normal text-indigo-500 hover:underline hove:runderline-offset-1 hover:text-indigo-700 transition-all">{{$role->title }}</a></x-table.cell.cell>
                                                         
                                                         <x-table.cell.cell>
+                                                            @can('update_role')
                                                             <button wire:click="Edit({{ $role->id }})" class="focus:border-transparent">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600 hover:text-green-700 dark:text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                                                   </svg>
                                                             </button>
+                                                            @endcan
                                                             @can('delete_role')
                                                             <button wire:loading.attr="disabled" wire:click.prevent="deleteConfirm({{ $role->id }})">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600 hover:text-red-700 dark:text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

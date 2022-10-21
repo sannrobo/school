@@ -8,6 +8,7 @@
             <div class="flex mb-8 " 
         
             >
+            @can('create_invoice')
                 <a id="btnCreate" href="{{ route('inv.create') }}"  class="  cursor-pointer dark:bg-white dark:hover:bg-white  flex space-x-1 items-center bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-2 rounded">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 dark:text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
@@ -15,7 +16,7 @@
                     </svg>  
                     <span class="dark:text-black">{{ __('Create Invoice') }}</span>
                 </a>
-
+                @endcan
         
                 
           
@@ -25,8 +26,20 @@
             
 
 
+        <div class="flex">
+            <div class="mr-3">
+                <input type="date" wire:model="start_date" class="px-2 py-2 rounded-md border-2 border-black" >
+            </div>
+            <div class="mr-3">
+                <input type="date" wire:model="end_date" class="px-2 py-2 rounded-md border-2 border-black">
+            </div>
+    
+            <div class="mr-3">
+                <button wire:click.prevent="clear" class="cursor-pointer dark:bg-white dark:hover:bg-white  flex space-x-1 items-center bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-2 rounded">Clear</button>
+            </div>
 
-          
+        </div>
+        @can('show_invoice')
         <div class="flex flex-col px-6 py-4  transition">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -43,7 +56,7 @@
                                          
                                                 <x-table.heading.heading class="text-center ">{{ __('Invoice') }}</x-table.heading.heading>
                                                 <x-table.heading.heading class="text-center ">{{ __('Student Name') }}</x-table.heading.heading>
-                                                <x-table.heading.heading class="text-center ">{{ __('Course') }}</x-table.heading.heading>
+                                                <x-table.heading.heading class="text-center ">{{ __('Class') }}</x-table.heading.heading>
                                                 <x-table.heading.heading class="text-center ">{{ __('Fee') }}</x-table.heading.heading>
                                  
                                                 <x-table.heading.heading class="text-center ">{{ __('Discount') }}</x-table.heading.heading>
@@ -57,13 +70,18 @@
                                             </x-slot>
 
                                             <x-slot name="body">
-                                            
+                                            @php
+                                                $totalAmount=0;
+                                            @endphp
                                                 @forelse ($inv as $in)
                                                     <x-table.row.row class="text-center">
+                                                        @php
+                                                            $totalAmount+=$in->total
+                                                        @endphp
                                                         <x-table.cell.cell>{{ $in->id }}</x-table.cell.cell>
                                                             
                                                         <x-table.cell.cell>{{ $in->kh_name }}</x-table.cell.cell>
-                                                        <x-table.cell.cell>{{ $in->c_name }}</x-table.cell.cell>
+                                                        <x-table.cell.cell>{{ $in->cname }}</x-table.cell.cell>
                                                         <x-table.cell.cell>${{ $in->fee }}</x-table.cell.cell>
                                                         <x-table.cell.cell>${{ $in->discount }}</x-table.cell.cell>
               
@@ -88,18 +106,19 @@
                                                                 </svg>
                                                             </button>
                                                             
-                                                            <button class="focus:outline-none" wire:loading.attr="disabled" wire:click.prevent="deleteConfirm({{ $in->id }})">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600 hover:text-red-700 dark:text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                            </svg>
-                                                            </button>
+       
                                                         </x-table.cell.cell>
+                                                        
                                                     </x-table.row.row>
+                                                    
                                                 @empty
                                                     <x-table.row.row >
                                                         <x-table.cell.cell colspan="12"  class="bg-gray-200 text-center ">{{ __('No Data!') }}</x-table.cell.cell>
                                                     </x-table.row.row>
                                                 @endforelse
+                                                <x-table.row.row >
+                                                    <x-table.cell.cell colspan="12" class="text-right text-xl text-red-600">Total = ${{ $totalAmount }}</x-table.cell.cell>
+                                                </x-table.row.row>
                                                                                         
                                             </x-slot>
 
@@ -115,7 +134,7 @@
                                 </div>
                                 <div class="px-6">
 
-                                    {{-- {{ $classes->links('custom-pagination-links-view') }}      --}}
+                                    {{-- {{ $inv->links('custom-pagination-links-view') }}      --}}
                                 </div>
 
 
@@ -128,6 +147,7 @@
             </div>
 
         </div>
+        @endcan
 
         
 

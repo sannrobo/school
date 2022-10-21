@@ -16,6 +16,7 @@ class Detail extends Component
 {
     use LivewireAlert;
     public $class_id;
+    public $sid;
     public $student, $student_id, $studata = [];
     public function render()
     {
@@ -36,6 +37,10 @@ class Detail extends Component
      
         return view('livewire.c-lass.detail',compact('classes','room','course','time','teacher','count'));
     }
+    protected $listeners = [
+        'confirmed'
+    ];
+
 
     public function updatedStudent(){
         $this->studata = Student::where('st_code','like','%'.$this->student.'%')
@@ -113,6 +118,75 @@ class Detail extends Component
      
      
 
-     ;
+     
+    }
+    public function result($id)
+    {
+        
+        return redirect()->to('/class/result/'.$id);
+    }
+
+    public function deleteConfirm($id , $stuid)
+    {
+      
+        $this->sid = ClassStudent::where('class_id',$id)->where('student_id',$stuid)->first();
+        if(auth()->user()->lang == 'en')
+        {
+        $this->alert('warning', '', [
+            'position' => 'center',
+            'timer' => '',
+            'toast' => false,
+            'text' => 'Do you want to delete ? ',
+            'showConfirmButton' => true,
+            'onConfirmed' => 'confirmed',
+            'showCancelButton' => true,
+            'onDismissed' => '',
+            'confirmButtonText' => 'Delete',
+            'cancelButtonText' => 'No',
+           ]);
+        }
+        else
+        {
+            $this->alert('warning', '', [
+                'position' => 'center',
+                'timer' => '',
+                'toast' => false,
+                'text' => 'តើអ្នកពិតជាចង់លុបមែនទេ ? ',
+                'showConfirmButton' => true,
+                'onConfirmed' => 'confirmed',
+                'showCancelButton' => true,
+                'onDismissed' => '',
+                'confirmButtonText' => 'លុប',
+                'cancelButtonText' => 'ទេ',
+               ]);
+        }
+
+    }
+
+    public function confirmed()
+    {
+
+     
+        $this->sid->delete();
+        if(auth()->user()->lang == 'en')
+        {
+        $this->alert('success', 'Deleted!', [
+            'position' => 'center',
+            'timer' => '1000',
+            'toast' => false,
+            'timerProgressBar' => true,
+            'width' => '300',
+           ]);
+        }
+        else
+        {
+            $this->alert('success', 'លុបបានជោគជ័យ', [
+                'position' => 'center',
+                'timer' => '1000',
+                'toast' => false,
+                'timerProgressBar' => true,
+                'width' => '300',
+               ]);
+        }
     }
 }

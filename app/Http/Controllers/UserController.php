@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\ClassStudentExport;
+use App\Exports\ExportResult;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\User;
@@ -105,6 +106,14 @@ class UserController extends Controller
        
 
         return Excel::download(new ClassStudentExport($id), 'student-in-class.xlsx');
+
+    }
+
+    public function exportResult($id)
+    {
+       
+
+        return Excel::download(new ExportResult($id), 'Result.xlsx');
 
     }
 }

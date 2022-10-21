@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\Role;
 use Carbon\Carbon;
 use DateTime;
+use Illuminate\Support\Facades\Gate;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Create extends Component
@@ -65,6 +66,7 @@ class Create extends Component
 
     public function render()
     {
+        abort_if(Gate::denies('create_employee'),403);
         $roles = Role::all();
         return view('livewire.employee.create' , compact('roles'));
     }

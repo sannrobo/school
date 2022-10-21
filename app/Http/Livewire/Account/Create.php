@@ -6,6 +6,7 @@ use App\Models\Classes;
 use App\Models\Student;
 use App\Models\Invoice;
 use App\Models\Invoice_Detail;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 
 class Create extends Component
@@ -14,6 +15,8 @@ class Create extends Component
     public function render()
 
     {  
+        abort_if(Gate::denies('create_invoice'),403);
+        
         if($this->discount=="")
         {
             $this->discount=0;
@@ -83,12 +86,8 @@ class Create extends Component
         $inv->save();
 
 
-        $invd = new Invoice_Detail();
-        $invd->invoice_id = $inv->id;
-        $invd->paid = $this->paid;
-        $invd->date = date('Y-m-d');
-        $invd->save();
        $this->resetFied();
        $this->reset('student_id','class_id');
+       $this->dispatchBrowserEvent('name-updated', ['id' => $inv->id]);
     }
 }

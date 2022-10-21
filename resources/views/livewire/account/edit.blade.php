@@ -1,9 +1,9 @@
 <div >
-    <x-slot name="title">{{ __('Create') }}</x-slot>
+    <x-slot name="title">{{ __('Edit') }}</x-slot>
 
     <div class="container grid px-6 mx-auto">
         <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-            {{ __('Create Invoice') }}
+            {{ __('Edit') }}
         </h2>
         <div class="max-w-6xl  py-2 sm:px-6 lg:px-8">
             <div class="flex mb-8 w-1/12" 
@@ -33,7 +33,7 @@
                                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                                         <div class="shadow-md overflow-hidden  sm:rounded-lg">
                                          
-                                            <form wire:submit.prevent="store">
+                                            <form wire:submit.prevent="updateInvoice">
                                                 {{-- <div class="m-5 dark:text-white text-xl font-bold">
                                                     {{ __('Creat Form') }}
                                                 </div> --}}
@@ -157,13 +157,8 @@
 
 
 </div>
-<script>
-   
-    window.addEventListener('name-updated', event => {
-        window.open('print/'+event.detail.id);
-    });
-    
-    </script>s
+
+
 
 
 

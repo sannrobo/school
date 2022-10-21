@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Score;
 use App\Models\Classes;
 use App\Models\ClassStudent;
 use App\Models\Score;
+use Illuminate\Support\Facades\Gate;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use stdClass;
@@ -18,6 +19,7 @@ class Index extends Component
     public $asg=[] , $reading=[] , $speaking=[] , $listening=[] , $writing=[] , $grammar=[];
     public function render()
     {
+        abort_if(Gate::denies('show_score'),403);
         
         $classes = Classes::where('status',1)
         ->join('courses','classes.course_id','courses.id')
@@ -103,6 +105,7 @@ class Index extends Component
 
     public function saveScore()
     {
+        abort_if(Gate::denies('create_score'),403);
 
        foreach($this->scores as $key=>$val)
        {

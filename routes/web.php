@@ -68,7 +68,8 @@ Route::middleware(['auth:sanctum', 'lang', 'verified'])->group(function () {
     Route::get('/users', \App\Http\Livewire\User\Index::class)->name('users.index');
     Route::get('/students', \App\Http\Livewire\Student\Index::class)->name('students.index');
     Route::get('/students/create', \App\Http\Livewire\Student\Create::class)->name('students.create');
-    Route::get('/students/{id}', \App\Http\Livewire\Student\Detail::class)->name('students.info');
+    Route::get('/students/detail/{id}', \App\Http\Livewire\Student\Detail::class)->name('students.info');
+    Route::get('/students/edit/{id}', \App\Http\Livewire\Student\Edit::class)->name('students.edit');
     Route::get('/sections', \App\Http\Livewire\Sections\Index::class)->name('sections.index');
     Route::get('/class', \App\Http\Livewire\Class\Index::class)->name('class.index');
     Route::get('/courses', \App\Http\Livewire\Course\Index::class)->name('courses.index');
@@ -88,5 +89,9 @@ Route::middleware(['auth:sanctum', 'lang', 'verified'])->group(function () {
     Route::get('/income',\App\Http\Livewire\Account\Income::class)->name('income.index');
     Route::get('/', [\App\Http\Controllers\Dashboard::class, 'index'])->name('dashboard');
     Route::get('/invoices/print/{id}', [\App\Http\Controllers\Dashboard::class, 'printInvoice'])->name('invoice.print');
+    Route::get('/class/result/{id}', \App\Http\Livewire\Score\Result::class)->name('result.index');
+    Route::get('/class/result/print/{id}', [\App\Http\Controllers\Dashboard::class, 'printResult'])->name('result.print');
+    Route::get('/class/result/export/{id}', [\App\Http\Controllers\UserController::class, 'exportResult'])->name('result.export');
+    Route::get('/invoices/edit/{id}',\App\Http\Livewire\Account\Edit::class)->name('invoie.edit');
  
 });

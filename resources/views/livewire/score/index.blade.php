@@ -151,14 +151,17 @@
                                     </div>
 
                                     <div class="grid justify-items-end">
+                                        @can('create_score')
                                         <div class="mt-5">
                                             <button  wire:click.prevent="saveScore"  class="right focus:outline-none ml-2 cursor-pointer dark:bg-white dark:hover:bg-white  flex space-x-1 items-center bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-2 rounded">
                                           
                                                     
                                                 <span class="dark:text-black">{{ __('Save') }}</span>
-                                        </button>
+                                             </button>
 
-                                        </div>
+                                        </div
+                                        @endcan
+                            
         
                                     </div>
 

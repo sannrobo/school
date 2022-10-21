@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Attendance;
 
 use App\Models\Attendance;
 use App\Models\Classes;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 
 class Report extends Component
@@ -11,6 +12,7 @@ class Report extends Component
     public $class_id,$atts;
     public function render()
     {
+        abort_if(Gate::denies('show_attendance'),403);
         $classes = Classes::where('status',1)
         ->join('courses','classes.course_id','courses.id')
         ->join('rooms','classes.room_id','rooms.id')

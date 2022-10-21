@@ -8,6 +8,7 @@ use Livewire\WithPagination;
 use App\Models\Classes;
 use App\Models\ClassStudent;
 use App\Models\Student;
+use Illuminate\Support\Facades\Gate;
 use Symfony\Component\VarDumper\Caster\ClassStub;
 
 class Index extends Component
@@ -36,6 +37,7 @@ class Index extends Component
 
     public function render()
     {
+        abort_if(Gate::denies('show_class'),403);
         $classes = Classes::where('status',1)
         ->join('courses','classes.course_id','courses.id')
         ->join('rooms','classes.room_id','rooms.id')

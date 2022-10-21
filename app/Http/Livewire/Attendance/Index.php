@@ -55,6 +55,12 @@ class Index extends Component
 
     public function search()
     {
+        $this->reset('students');
+
+        $atts = Attendance::whereIn('class_id', ([$this->class_id]))
+        ->whereDate('date',$this->date)
+        ->get();
+
         $this->students = ClassStudent::join('students','class_student.student_id','students.id')
 
         ->whereIn('class_student.class_id',([$this->class_id]))
@@ -63,9 +69,7 @@ class Index extends Component
         ->get();
 
       
-        $atts = Attendance::whereIn('class_id', [$this->class_id])
-        ->whereDate('date',$this->date)
-        ->get();
+  
 
         
         if(count($atts)>0)
@@ -106,7 +110,7 @@ class Index extends Component
         ->get();
   
   
- 
+
 
     
              if(count($atts)>0)
@@ -114,7 +118,9 @@ class Index extends Component
             
                 foreach($this->radio as $key=>$val)
                 {
-                 $atts = Attendance::whereIn('class_id', [$this->class_id])
+                
+
+                 $att = Attendance::whereIn('class_id', [$this->class_id])
                  ->whereDate('date',$this->date)
                  ->where('student_id',$key)->update([
                     'att'=>$val

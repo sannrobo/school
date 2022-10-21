@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Sections;
 
 use App\Models\Section;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -23,12 +24,13 @@ class Index extends Component
     }
     public function render()
     {
+        abort_if(Gate::denies('show_time'),403);
         $sections = Section::paginate(5);
         return view('livewire.sections.index' , compact('sections'));
     }
     public function saveSection()
     {
-
+        abort_if(Gate::denies('create_time'),403);
         Section::create([
         'name'=>$this->name
         ]);

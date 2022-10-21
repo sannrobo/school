@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Employee;
 
 use App\Models\Employee;
 use App\Models\Role;
+use Illuminate\Support\Facades\Gate;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
@@ -53,7 +54,7 @@ class Edit extends Component
 
     }
     public function render()
-    {
+    { abort_if(Gate::denies('update_employee'),403);
         $roles = Role::all();
         return view('livewire.employee.edit',compact('roles'));
     }

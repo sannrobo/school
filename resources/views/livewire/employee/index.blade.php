@@ -9,6 +9,7 @@
             <div class="flex mb-8 w-1/12" 
 
             >
+            @can('create_employee')
                 <a id="btnCreate" href="{{ route('emp.create') }}"  class="  cursor-pointer dark:bg-white dark:hover:bg-white  flex space-x-1 items-center bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-2 rounded">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 dark:text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
@@ -16,6 +17,7 @@
                     </svg>  
                     <span class="dark:text-black">{{ __('Create') }}</span>
                 </a>
+                @endcan
 
                 {{-- <a id="btnCreate" href="{{ route('emp.create') }}"  class=" ml-5  cursor-pointer dark:bg-white dark:hover:bg-white  flex space-x-1 items-center bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-2 rounded">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 dark:text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
@@ -86,6 +88,7 @@
 
 
                                                             <div class="flex justify-between">
+                                                                @can('update_employee')
                                                                 <div>
                                                                     <a href="{{ route('emp.edit',$s->id) }}"  class="focus:border-transparent " >
                                                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600 hover:text-green-700 dark:text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -93,8 +96,9 @@
                                                                           </svg>
                                                                     </a>
                                                                 </div>
+                                                                @endcan
 
-                                                                
+                                                                @can('delete_employee')
                                                                 <div>
                                                                                                                        
                                                                 <button wire:loading.attr="disabled" wire:click.prevent="deleteConfirm({{ $s->id }})">
@@ -103,6 +107,7 @@
                                                                 </svg>
                                                                 </button>
                                                                 </div>
+                                                                @endcan
                                                             </div>
 
                                                                                                                             

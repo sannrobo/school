@@ -1,14 +1,15 @@
 <div x-data="{openForm:''}"  x-init="openForm=false">
-    <x-slot  name="title">{{ __('Class') }}</x-slot>
-    <div class="container grid px-6 mx-auto">
+    <x-slot  name="title">{{ __('Result') }}</x-slot>
+    <div class="container grid px-6 mx-auto bg-white">
         <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-            {{ __('Class') }}
+            {{ __('Result') }}
         </h2>
 
             <div class="flex mb-8 " 
-        
+
             >
-            @can('create_class')
+            
+            {{-- @can('create_class')
                 <a id="btnCreate" href="{{ route('class.create') }}"  class="  cursor-pointer dark:bg-white dark:hover:bg-white  flex space-x-1 items-center bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-2 rounded">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 dark:text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
@@ -26,7 +27,7 @@
                     <span class="dark:text-black">{{ __('Add Student To Class') }}</span>
                 </button>
                 
-                @endcan
+                @endcan --}}
                 {{-- <a href="{{ route('r.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Create</a> --}}
             </div>
 
@@ -34,7 +35,7 @@
 
 
 
-            <div @click.outside="openForm = false"
+            {{-- <div @click.outside="openForm = false"
            x-show="openForm"
            x-collapse
            @is-open.window="openForm = false"
@@ -101,9 +102,9 @@
                     </form>
                 </div>
                 </div>
-            </div>
+            </div> --}}
          
-
+            
         <div class="flex flex-col px-6 py-4  transition">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -113,20 +114,37 @@
                             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 ">
 
                                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8 h-screen">
-
-                                    <div class="shadow-lg  overflow-hidden  sm:rounded-lg">
-                                        <x-table.table class="rounded-sm ">
+                         
+                                    <div class="shadow-lg  overflow-hidden  sm:rounded-lg ">
+                                        <div class="flex px-2 py-4">
+                                            <div class="mr-2">
+                                                <a href="{{ route('result.print',$class_id) }}" target="_blank" class="cursor-pointer dark:bg-white dark:hover:bg-white  flex space-x-1 items-center bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-2 rounded">
+                                                    Print
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <a href="{{ route('result.export' , $class_id) }}" target="_blank" class="cursor-pointer dark:bg-white dark:hover:bg-white  flex space-x-1 items-center bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-2 rounded">
+                                                    Excel
+                                                </a>
+                                            </div>
+                                        </div> 
+                                        <x-table.table class="rounded-sm overflow-scroll w-full">
                                             <x-slot name="header">
                                                 <x-table.heading.heading class="text-center ">#</x-table.heading.heading>
-                                                <x-table.heading.heading class="text-center ">{{ __('Class Name') }}</x-table.heading.heading>
-                                                <x-table.heading.heading class="text-center ">{{ __('Room') }}</x-table.heading.heading>
-                                                <x-table.heading.heading class="text-center ">{{ __('Course') }}</x-table.heading.heading>
-                                                <x-table.heading.heading class="text-center ">{{ __('Price') }}</x-table.heading.heading>
+                                                <x-table.heading.heading class="text-center ">{{ __('Name') }}</x-table.heading.heading>
+                                                <x-table.heading.heading class="text-center ">{{ __('Gender') }}</x-table.heading.heading>
+                                                <x-table.heading.heading class="text-center ">{{ __('DOB') }}</x-table.heading.heading>
+                                                <x-table.heading.heading class="text-center ">{{ __('Asg') }}</x-table.heading.heading>
                                  
-                                                <x-table.heading.heading class="text-center ">{{ __('Time') }}</x-table.heading.heading>
+                                                <x-table.heading.heading class="text-center ">{{ __('reading') }}</x-table.heading.heading>
                                         
-                                                <x-table.heading.heading class="text-center ">{{ __('Teacher') }}</x-table.heading.heading>
-                                                <x-table.heading.heading class="text-center ">{{ __('Action') }}</x-table.heading.heading>
+                                                <x-table.heading.heading class="text-center ">{{ __('writing') }}</x-table.heading.heading>
+                                                <x-table.heading.heading class="text-center ">{{ __('speaking') }}</x-table.heading.heading>
+                                                <x-table.heading.heading class="text-center ">{{ __('Grammar') }}</x-table.heading.heading>
+                                                <x-table.heading.heading class="text-center ">{{ __('Listening') }}</x-table.heading.heading>
+                                                <x-table.heading.heading class="text-center ">{{ __('Total') }}</x-table.heading.heading>
+                                                <x-table.heading.heading class="text-center ">{{ __('Pass/Fail') }}</x-table.heading.heading>
+
 
                                             </x-slot>
 
@@ -134,18 +152,38 @@
                                                 @php
                                                     $i=1
                                                 @endphp
-                                                @forelse ($classes as $c)
+                                                @forelse ($score as $s)
+                                                @php
+                                                    $student = DB::table('students')->where('id' , $s->student_id)->first(); 
+                                                    $total = $s->asg + $s->reading + $s->writing +  $s->speaking +  $s->grammar;
+                                                @endphp
                                                     <x-table.row.row class="text-center">
                                                         <x-table.cell.cell>{{ $i++ }}</x-table.cell.cell>
                                                             
-                                                        <x-table.cell.cell><a class="text-blue-600" href="{{ route('class.detail',$c->class_id) }}">{{ $c->class_name }}</a></x-table.cell.cell>
-                                                        <x-table.cell.cell>{{ $c->room_name }}</x-table.cell.cell>
+                                                        <x-table.cell.cell>{{ $student->st_name_kh }}</x-table.cell.cell>
+                                                        <x-table.cell.cell>{{ ($student->st_gender == 1)?'M':'F' }}</x-table.cell.cell>
+                                                        <x-table.cell.cell>{{ $student->st_dob }}</x-table.cell.cell>
+                                                        <x-table.cell.cell>{{ $s->asg }}</x-table.cell.cell>
+                                                        <x-table.cell.cell>{{ $s->reading }}</x-table.cell.cell>
+                                                        <x-table.cell.cell>{{ $s->writing }}</x-table.cell.cell>
+                                                        <x-table.cell.cell>{{ $s->speaking }}</x-table.cell.cell>
+                                                        <x-table.cell.cell>{{ $s->grammar }}</x-table.cell.cell>
+                                                        <x-table.cell.cell>{{ $s->listening }}</x-table.cell.cell>
+                                                        <x-table.cell.cell>{{ $total }}</x-table.cell.cell>
+                                                        @if($total<120)
+                                                        <x-table.cell.cell class="text-red-600">F</x-table.cell.cell>
+                                                        @else
+                                                        <x-table.cell.cell class="text-green-600">P</x-table.cell.cell>
+                                                        @endif
+
+
+                                                        {{-- <x-table.cell.cell>{{ $c->room_name }}</x-table.cell.cell>
                                                         <x-table.cell.cell>{{ $c->name }}</x-table.cell.cell>
                                                         <x-table.cell.cell>${{ $c->price }}</x-table.cell.cell>
               
                                                         <x-table.cell.cell>{{ $c->time }}</x-table.cell.cell>
                                                     
-                                                        <x-table.cell.cell>{{ $c->teacher_name_kh }}</x-table.cell.cell>
+                                                        <x-table.cell.cell>{{ $c->teacher_name_kh }}</x-table.cell.cell> --}}
                                                         
 
 
@@ -154,22 +192,7 @@
 
                                                         
                                                         
-                                                        <x-table.cell.cell>
-                                                            @can('update_class')
-                                                            <button wire:click="Edit({{ $c->class_id }})" class="focus:border-transparent focus:outline-none">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600 hover:text-green-700 dark:text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                                                </svg>
-                                                            </button>
-                                                            @endcan
-                                                            @can('delete_class')
-                                                            <button class="focus:outline-none" wire:loading.attr="disabled" wire:click.prevent="deleteConfirm({{ $c->class_id }})">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600 hover:text-red-700 dark:text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                            </svg>
-                                                            </button>
-                                                            @endcan
-                                                        </x-table.cell.cell>
+                        
                                                     </x-table.row.row>
                                                 @empty
                                                     <x-table.row.row >
@@ -190,8 +213,8 @@
 
                                 </div>
                                 <div class="px-6">
-
-                                    {{ $classes->links('custom-pagination-links-view') }}     
+{{-- 
+                                    {{ $classes->links('custom-pagination-links-view') }}      --}}
                                 </div>
 
 
